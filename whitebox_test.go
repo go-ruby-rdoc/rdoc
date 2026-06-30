@@ -667,3 +667,80 @@ func TestHighlightUnterminatedMidBlock(t *testing.T) {
 		t.Error("unterminated regexp mid-block should fall back")
 	}
 }
+
+func TestCRLFNoteList(t *testing.T) {
+	// NOTE list with CRLF exercises the \r\n consumed branch
+	got := ToHTML("term::\r\n  desc\r\n")
+	if !strings.Contains(got, "<dt>term</dt>") {
+		t.Errorf("crlf note: %q", got)
+	}
+}
+
+func TestBuildListEmptyLabelOnly(t *testing.T) {
+	// a label with no description and nothing after yields an empty-desc item
+	got := ToHTML("[only]\n")
+	if !strings.Contains(got, "<dt>only</dt>") || !strings.Contains(got, "<dd>") {
+		t.Errorf("empty label: %q", got)
+	}
+}
+
+func TestBuildListBulletEmptyStream(t *testing.T) {
+	// a bullet at end of stream with nothing after
+	got := ToHTML("* x")
+	if !strings.Contains(got, "<li>") {
+		t.Errorf("bullet eof: %q", got)
+	}
+}
+
+func TestNonMatchingWordPairNonUpdating(t *testing.T) {
+	// run the same non-matching pair flow twice on overlapping content so the
+	// second occurrence is already attributed (the !updated break in
+	// convertWordPairMap).
+	am := newAttributeManager()
+	am.addWordPair("{", "}", attrUserBase<<8, false)
+	flow := am.flow("{a} and {b}")
+	n := 0
+	for _, f := range flow {
+		if _, ok := f.(regexpHandling); ok {
+			n++
+		}
+	}
+	_ = n // primarily exercises the conversion path without panicking
+}
+
+func TestVerbatimDecreasingIndent(t *testing.T) {
+	// decreasing indentation drives the min-indent shift in build_verbatim
+	got := ToHTML("      a\n    b\n  c\n")
+	if !strings.Contains(got, "<pre") {
+		t.Errorf("decreasing indent: %q", got)
+	}
+}
+
+func TestMarkdownRdocInlineRegexp(t *testing.T) {
+	// inline link in a paragraph exercises the regexpHandling case in
+	// markdownInline / rdocInline
+	if got := ToMarkdownString("a http://x.com b\n"); !strings.Contains(got, "http://x.com") {
+		t.Errorf("md inline regexp: %q", got)
+	}
+	if got := ToRdocString("a http://x.com b\n"); !strings.Contains(got, "http://x.com") {
+		t.Errorf("rdoc inline regexp: %q", got)
+	}
+}
+
+func TestMarkdownRdocVerbatimEmptyLineSkip(t *testing.T) {
+	// SplitAfter yields a trailing "" element which the empty-line skip drops
+	if got := ToMarkdownString("  only\n"); !strings.Contains(got, "    only") {
+		t.Errorf("md verbatim single: %q", got)
+	}
+	if got := ToRdocString("  only\n"); !strings.Contains(got, "  only") {
+		t.Errorf("rdoc verbatim single: %q", got)
+	}
+}
+
+func TestTextLiteralQuotEntity(t *testing.T) {
+	// "&quot;" already-escaped entity in text -> smart double quote
+	got := textToHTML("&quot;hi&quot;")
+	if !strings.Contains(got, entOpenDQuote) {
+		t.Errorf("quot literal: %q", got)
+	}
+}

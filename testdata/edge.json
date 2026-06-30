@@ -107,6 +107,26 @@
     "crlf_note": {
       "in": "a::\r\n  b\r\n",
       "html": "<dl class=\"rdoc-list note-list\"><dt>a</dt>\n<dd>\n<p>b</p>\n</dd></dl>\n"
+    },
+    "verb_unindent": {
+      "in": "      a\n    b\n  c\n",
+      "html": "\n<pre class=\"ruby\">    <span class=\"ruby-identifier\">a</span>\n  <span class=\"ruby-identifier\">b</span>\n<span class=\"ruby-identifier\">c</span>\n</pre>\n"
+    },
+    "verb_short_line": {
+      "in": "  ab\n    \n  cd\n",
+      "html": "\n<pre class=\"ruby\"><span class=\"ruby-identifier\">ab</span>\n\n<span class=\"ruby-identifier\">cd</span>\n</pre>\n"
+    },
+    "note_label_mix_empty": {
+      "in": "[a]\nx:: y\n",
+      "html": "<dl class=\"rdoc-list label-list\"><dt>a</dt>\n<dd></dd></dl>\n<dl class=\"rdoc-list note-list\"><dt>x</dt>\n<dd>\n<p>y</p>\n</dd></dl>\n"
+    },
+    "quot_literal": {
+      "in": "say &quot;hi&quot; ok\n",
+      "html": "\n<p>say &amp;quot;hi&amp;quot; ok</p>\n"
+    },
+    "empty_note_list2": {
+      "in": "[a]\n  ",
+      "html": "<dl class=\"rdoc-list label-list\"><dt>a</dt>\n<dd></dd></dl>\n"
     }
   }
 }

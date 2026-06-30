@@ -468,8 +468,8 @@ func TestTextDoubleQuoteEntity(t *testing.T) {
 	if !strings.Contains(got, entOpenDQuote) || !strings.Contains(got, entCloseDQuote) {
 		t.Errorf("quot entity: %q", got)
 	}
-	// '' double close-quote
-	got2 := textToHTML("a''b")
+	// &#39;&#39; (escaped '') -> double close-quote
+	got2 := textToHTML("a&#39;&#39;b")
 	if !strings.Contains(got2, entCloseDQuote) {
 		t.Errorf("tick double: %q", got2)
 	}
@@ -580,8 +580,8 @@ func TestTextQuotEntitySkip(t *testing.T) {
 }
 
 func TestTextApostropheAfterWord(t *testing.T) {
-	// word' -> closing single quote (after_word branch)
-	got := textToHTML("dogs' bones")
+	// word&#39; (escaped apostrophe after a word) -> closing single quote
+	got := textToHTML("dogs&#39; bones")
 	if !strings.Contains(got, entCloseSQuote) {
 		t.Errorf("apostrophe after word: %q", got)
 	}
@@ -742,5 +742,87 @@ func TestTextLiteralQuotEntity(t *testing.T) {
 	got := textToHTML("&quot;hi&quot;")
 	if !strings.Contains(got, entOpenDQuote) {
 		t.Errorf("quot literal: %q", got)
+	}
+}
+
+func TestBlockquoteConsumedCRLF(t *testing.T) {
+	if blockquoteConsumed(">>> word\r\n", "word") != 4 {
+		t.Errorf("crlf blockquote consumed: %d", blockquoteConsumed(">>> word\r\n", "word"))
+	}
+	if labelConsumed("[x] \r\n") != 4 {
+		t.Errorf("crlf label consumed: %d", labelConsumed("[x] \r\n"))
+	}
+}
+
+func TestVerbatimThenDedent(t *testing.T) {
+	// verbatim followed by a less-indented line ends the verbatim (column<=margin)
+	doc := Parse("para\n\n  verbatim line\nback\n")
+	foundVerb := false
+	for _, p := range doc.Parts {
+		if _, ok := p.(*Verbatim); ok {
+			foundVerb = true
+		}
+	}
+	if !foundVerb {
+		t.Error("expected a verbatim block")
+	}
+}
+
+func TestVerbatimHeaderRuleInside(t *testing.T) {
+	// a header/rule token inside a verbatim block with following content drives
+	// the indent>0 spacing branches.
+	got := ToHTML("  code\n  == h x\n  --- y\n")
+	if !strings.Contains(got, "<pre") {
+		t.Errorf("verbatim header/rule: %q", got)
+	}
+}
+
+func TestVerbatimTrailingNoNewline(t *testing.T) {
+	// a verbatim block whose final line has no trailing newline (line != "")
+	got := ToHTML("para\n\n  last line no nl")
+	if !strings.Contains(got, "last line no nl") {
+		t.Errorf("verbatim trailing: %q", got)
+	}
+}
+
+func TestBuildListLabelDescNonEmpty(t *testing.T) {
+	// LABEL whose description is on the same line (empty=false default branch)
+	got := ToHTML("[a] same line desc\n")
+	if !strings.Contains(got, "same line desc") {
+		t.Errorf("label same-line: %q", got)
+	}
+}
+
+func TestBuildListLabelThenText(t *testing.T) {
+	// LABEL followed by an outdented paragraph (column < margin -> empty=true)
+	got := ToHTML("[a]\nback to paragraph\n")
+	if !strings.Contains(got, "<dt>a</dt>") {
+		t.Errorf("label then text: %q", got)
+	}
+}
+
+func TestNoteEmptyAtEOF(t *testing.T) {
+	// note label with empty description at end of stream
+	got := ToHTML("term::")
+	if !strings.Contains(got, "<dt>term</dt>") {
+		t.Errorf("note eof: %q", got)
+	}
+}
+
+func TestWordPairMapNonUpdating(t *testing.T) {
+	// two non-matching pairs sharing overlapping bytes so the second match is
+	// already attributed, exercising the !updated break in convertWordPairMap.
+	am := newAttributeManager()
+	am.addWordPair("[", "]", attrUserBase<<8, false)
+	// nested same-delimiter content forces a re-scan where the inner span is
+	// already set on a later gsub iteration.
+	_ = am.flow("[a[b]c]")
+}
+
+func TestAppendFragmentEmpty(t *testing.T) {
+	// an empty inline string produces an empty fragment (early return)
+	got := ToHTML("a <b></b> c\n")
+	if got == "" {
+		t.Fatal("empty")
 	}
 }

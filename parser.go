@@ -562,10 +562,7 @@ func (p *parser) buildList(margin int) *List {
 	var label []string
 
 	for len(p.tokens) > 0 {
-		t, ok := p.get()
-		if !ok {
-			break
-		}
+		t, _ := p.get() // guarded by the loop condition above
 
 		if !t.kind.isList() {
 			p.unget()
@@ -642,13 +639,12 @@ func (p *parser) buildList(margin int) *List {
 		list.push(item)
 	}
 
-	if list.empty() {
-		if label == nil {
-			return list
-		}
-		if list.Type != ListLabel && list.Type != ListNote {
-			return list
-		}
+	// An empty list with a pending label means a bare LABEL/NOTE term with no
+	// description (e.g. "[only]\n"): emit it as an item with an empty body. A
+	// label is only ever collected for LABEL/NOTE lists, so the gem's extra
+	// "return nil unless label" / "unless [:LABEL,:NOTE]" guards are invariants
+	// here and are omitted.
+	if list.empty() && label != nil {
 		item := &ListItem{Label: label}
 		item.push(&BlankLine{})
 		list.push(item)

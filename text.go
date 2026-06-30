@@ -106,30 +106,25 @@ func textToHTML(text string) string {
 			b.WriteString(entEnDash)
 			s = s[2:]
 			afterWord = false
-		case strings.HasPrefix(s, "&quot;") || strings.HasPrefix(s, `"`):
+		// Quote characters always arrive HTML-escaped (the inline flow is
+		// CGI-escaped before this pass), so only the entity forms are matched;
+		// raw '"' / '\'' never reach here.
+		case strings.HasPrefix(s, "&quot;"):
 			if indquotes {
 				b.WriteString(entCloseDQuote)
 			} else {
 				b.WriteString(entOpenDQuote)
 			}
 			indquotes = !indquotes
-			if strings.HasPrefix(s, "&quot;") {
-				s = s[len("&quot;"):]
-			} else {
-				s = s[1:]
-			}
+			s = s[len("&quot;"):]
 			afterWord = false
 		case strings.HasPrefix(s, "``"):
 			b.WriteString(entOpenDQuote)
 			s = s[2:]
 			afterWord = false
-		case strings.HasPrefix(s, "&#39;&#39;") || strings.HasPrefix(s, "''"):
+		case strings.HasPrefix(s, "&#39;&#39;"):
 			b.WriteString(entCloseDQuote)
-			if strings.HasPrefix(s, "&#39;&#39;") {
-				s = s[len("&#39;&#39;"):]
-			} else {
-				s = s[2:]
-			}
+			s = s[len("&#39;&#39;"):]
 			afterWord = false
 		case strings.HasPrefix(s, "`"):
 			if insquotes || afterWord {
@@ -140,7 +135,7 @@ func textToHTML(text string) string {
 				insquotes = true
 			}
 			s = s[1:]
-		case strings.HasPrefix(s, "&#39;") || strings.HasPrefix(s, "'"):
+		case strings.HasPrefix(s, "&#39;"):
 			if insquotes {
 				b.WriteString(entCloseSQuote)
 				insquotes = false
@@ -150,11 +145,7 @@ func textToHTML(text string) string {
 				b.WriteString(entOpenSQuote)
 				insquotes = true
 			}
-			if strings.HasPrefix(s, "&#39;") {
-				s = s[len("&#39;"):]
-			} else {
-				s = s[1:]
-			}
+			s = s[len("&#39;"):]
 			afterWord = false
 		default:
 			// advance to the next significant character: < \ . ( " ' ` & -

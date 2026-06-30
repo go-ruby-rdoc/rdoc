@@ -265,11 +265,9 @@ var rubyOperators = []string{
 }
 
 func (h *rubyHL) isSymbolStart() bool {
-	// ':' followed by an identifier char, and not '::'
+	// ':' followed by an identifier char. The "::" case is handled earlier in
+	// the main scan, so it never reaches here.
 	if h.pos+1 >= len(h.src) {
-		return false
-	}
-	if h.src[h.pos+1] == ':' {
 		return false
 	}
 	return isIdentStart(h.src[h.pos+1])

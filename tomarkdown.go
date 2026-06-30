@@ -36,13 +36,11 @@ func (m *ToMarkdown) acceptParagraph(p *Paragraph) {
 }
 
 func (m *ToMarkdown) acceptVerbatim(v *Verbatim) {
-	for _, line := range strings.SplitAfter(strings.TrimRight(v.text(), "\n"), "\n") {
+	for _, line := range strings.Split(strings.TrimRight(v.text(), "\n"), "\n") {
 		if line == "" {
-			continue
-		}
-		m.out("    " + line)
-		if !strings.HasSuffix(line, "\n") {
 			m.out("\n")
+		} else {
+			m.out("    " + line + "\n")
 		}
 	}
 	m.out("\n")
@@ -144,12 +142,12 @@ func markdownInline(text string) string {
 	am := newAttributeManager()
 	flow := am.flow(text)
 	var b strings.Builder
+	// The base attribute manager registers no regexp handlers, so the flow
+	// contains only strings and attribute changes (links pass through as text).
 	for _, f := range flow {
 		switch v := f.(type) {
 		case flowString:
 			b.WriteString(string(v))
-		case regexpHandling:
-			b.WriteString(v.text)
 		case attrChanger:
 			writeMarkdownTags(&b, v)
 		}

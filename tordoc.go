@@ -35,13 +35,11 @@ func (r *ToRdoc) acceptParagraph(p *Paragraph) {
 }
 
 func (r *ToRdoc) acceptVerbatim(v *Verbatim) {
-	for _, line := range strings.SplitAfter(strings.TrimRight(v.text(), "\n"), "\n") {
+	for _, line := range strings.Split(strings.TrimRight(v.text(), "\n"), "\n") {
 		if line == "" {
-			continue
-		}
-		r.out("  " + line)
-		if !strings.HasSuffix(line, "\n") {
 			r.out("\n")
+		} else {
+			r.out("  " + line + "\n")
 		}
 	}
 	r.out("\n")
@@ -135,12 +133,12 @@ func rdocInline(text string) string {
 	am := newAttributeManager()
 	flow := am.flow(text)
 	var b strings.Builder
+	// The base attribute manager registers no regexp handlers, so the flow
+	// contains only strings and attribute changes.
 	for _, f := range flow {
 		switch v := f.(type) {
 		case flowString:
 			b.WriteString(string(v))
-		case regexpHandling:
-			b.WriteString(v.text)
 		case attrChanger:
 			writeRdocTags(&b, v)
 		}

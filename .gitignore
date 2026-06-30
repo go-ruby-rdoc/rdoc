@@ -1,16 +1,20 @@
-# Go test binaries: `go test -c` and an interrupted `go test` run leave a
-# `<pkg>.test` executable behind. Never commit them.
-*.test
 
 # Coverage profiles produced by `go test -coverprofile` / the CI coverage gate.
-cover.out
+# Go test binaries: `go test -c` and an interrupted `go test` run leave a
+# `<pkg>.test` executable behind. Never commit them.
 *.cover
-coverage.txt
-cvX.out
-cvX.log
-cvX.done
-cov2.out
+*.test
+cov*.log
 cov2.log
-cov3.out
+cov2.out
 cov3.log
+cov3.out
 cov4.out
+cov5.out
+cov6.out
+cov7.out
+cover.out
+coverage.txt
+cvX.done
+cvX.log
+cvX.out

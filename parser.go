@@ -491,16 +491,10 @@ func (p *parser) buildVerbatim(margin int) *Verbatim {
 				line += strings.Repeat(" ", indent)
 			}
 		case t.kind == tkRule:
-			width := 2 + t.num
-			line += strings.Repeat("-", width)
-			peekCol := t.column + width
-			if pt, ok := p.peek(); ok {
-				peekCol = pt.column
-			}
-			indent := peekCol - t.column - width
-			if indent > 0 {
-				line += strings.Repeat(" ", indent)
-			}
+			// A RULE token spans a whole line and is always followed by a
+			// NEWLINE, so there is never trailing content to pad to; the dashes
+			// are the entire reconstructed contribution.
+			line += strings.Repeat("-", 2+t.num)
 		case t.kind == tkBreak || t.kind == tkText:
 			line += t.str
 		case t.kind == tkBlockquote:
@@ -528,12 +522,11 @@ func (p *parser) buildVerbatim(margin int) *Verbatim {
 	}
 	if minIndent > 0 {
 		for i, part := range vb.Parts {
+			// Every non-blank verbatim part begins with at least minIndent
+			// leading spaces (minIndent is the smallest leading indent seen), so
+			// the left-shift slice is always in range.
 			if part != "\n" {
-				if len(part) >= minIndent {
-					vb.Parts[i] = part[minIndent:]
-				} else {
-					vb.Parts[i] = ""
-				}
+				vb.Parts[i] = part[minIndent:]
 			}
 		}
 	}

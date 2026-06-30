@@ -127,6 +127,18 @@
     "empty_note_list2": {
       "in": "[a]\n  ",
       "html": "<dl class=\"rdoc-list label-list\"><dt>a</dt>\n<dd></dd></dl>\n"
+    },
+    "verb_rule_tail": {
+      "in": "  a\n  ---   tail\n",
+      "html": "\n<pre class=\"ruby\"><span class=\"ruby-identifier\">a</span>\n<span class=\"ruby-operator\">-</span><span class=\"ruby-operator\">-</span><span class=\"ruby-operator\">-</span>   <span class=\"ruby-identifier\">tail</span>\n</pre>\n"
+    },
+    "verb_short_part": {
+      "in": "     x\n  yy\n",
+      "html": "\n<pre class=\"ruby\">   <span class=\"ruby-identifier\">x</span>\n<span class=\"ruby-identifier\">yy</span>\n</pre>\n"
+    },
+    "empty_bold": {
+      "in": "a <b></b> c\n",
+      "html": "\n<p>a  c</p>\n"
     }
   }
 }

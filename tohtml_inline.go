@@ -36,9 +36,6 @@ func (h *ToHtml) convertFlow(flow []flowItem) string {
 }
 
 func (h *ToHtml) appendFragment(res *strings.Builder, frag string) {
-	if frag == "" {
-		return
-	}
 	res.WriteString(frag)
 }
 

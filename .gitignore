@@ -4,6 +4,9 @@
 # `<pkg>.test` executable behind. Never commit them.
 *.cover
 *.test
+cf.out
+cg.log
+cg.out
 cov*.log
 cov2.log
 cov2.out
@@ -18,3 +21,4 @@ coverage.txt
 cvX.done
 cvX.log
 cvX.out
+ze.out

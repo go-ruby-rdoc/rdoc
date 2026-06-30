@@ -104,7 +104,7 @@ func (am *attributeManager) addWordPair(start, stop string, bit uint, exclusive 
 	if start == stop {
 		am.matchingWordPairs[start] = bit
 	} else {
-		pattern := regexp.MustCompile(regexp.QuoteMeta(start) + `(\S+)` + regexp.QuoteMeta(stop))
+		pattern := regexp.MustCompile(`(` + regexp.QuoteMeta(start) + `)(\S+)(` + regexp.QuoteMeta(stop) + `)`)
 		am.wordPairMap = append(am.wordPairMap, wordPair{pattern, bit})
 	}
 	am.protectable = appendUniq(am.protectable, start[:1])
@@ -518,16 +518,6 @@ func (st *attrState) splitIntoFlow() []flowItem {
 func changeAttribute(current, next uint) attrChanger {
 	diff := current ^ next
 	return attrChanger{turnOn: next & diff, turnOff: current & diff}
-}
-
-func keysOf(m map[string]uint) []string {
-	out := make([]string, 0, len(m))
-	for k := range m {
-		out = append(out, k)
-	}
-	// stable order: by the natural order of the three delimiters * _ +
-	sortStrings(out)
-	return out
 }
 
 func sortedTags(t []string) []string {

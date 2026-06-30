@@ -74,7 +74,7 @@ type parser struct {
 var (
 	reLeadingSpaces = regexp.MustCompile(`^ +`)
 	reNewline       = regexp.MustCompile(`^\r?\n`)
-	reHeader        = regexp.MustCompile(`^(=+)([ \t]*)`)
+	reHeader        = regexp.MustCompile(`^(=+)(\s*)`)
 	reHeaderNL      = regexp.MustCompile(`^\r?\n`)
 	reRule          = regexp.MustCompile(`^(-{3,}) *\r?(?:\n|$)`)
 	reBullet        = regexp.MustCompile(`^([*-]) +(\S)`)
@@ -142,10 +142,17 @@ func (p *parser) tokenize(input string) {
 				s = s[len(m[1]):]
 				continue
 			}
-			// header with text: consume "=+\s*" then the rest of the line (.*).
+			// header with text: consume "=+\s*" (the whitespace may span a
+			// newline) then the rest of that line (.*) as the heading text.
 			emit(token{kind: tkHeader, num: level, column: pos})
 			consumed := len(m[0])
-			column += consumed
+			// recompute the column after consuming whitespace that may contain
+			// newlines, so the text token's column is correct.
+			if nl := strings.LastIndexByte(m[0], '\n'); nl >= 0 {
+				column = len(m[0]) - nl - 1
+			} else {
+				column += consumed
+			}
 			s = s[consumed:]
 			textPos := column
 			line := lineRest(s) // up to but not including the newline

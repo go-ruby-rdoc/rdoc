@@ -2,8 +2,10 @@ package rdoc
 
 // ToMarkdown renders the markup model to Markdown, mirroring
 // RDoc::Markup::ToMarkdown for the common block constructs. Inline bold/em/tt
-// map to **/_/` and headings to ATX (#). This focuses on the deterministic
-// block structure; complex inline link handling falls back to the raw text.
+// map to **/*/` and headings to ATX (#). This focuses on the deterministic
+// block structure; complex inline link handling falls back to the raw text and
+// deeply nested lists are not re-indented (the gem's per-level prefix tracking
+// is out of scope for this secondary formatter).
 
 import "strings"
 
@@ -51,7 +53,9 @@ func (m *ToMarkdown) acceptRule(*Rule) { m.out("---\n") }
 func (m *ToMarkdown) acceptHeading(h *Heading) {
 	level := h.Level
 	if level > 6 {
-		level = 6
+		// RDoc::Markup::ToMarkdown emits no ATX marker for levels above 6.
+		m.out(markdownInline(h.Text) + "\n")
+		return
 	}
 	m.out(strings.Repeat("#", level) + " " + markdownInline(h.Text) + "\n")
 }
@@ -59,9 +63,25 @@ func (m *ToMarkdown) acceptHeading(h *Heading) {
 func (m *ToMarkdown) acceptBlankLine(*BlankLine) { m.out("\n") }
 
 func (m *ToMarkdown) acceptBlockQuote(b *BlockQuote) {
+	inner := NewToMarkdown()
+	inner.startAccepting()
 	for _, p := range b.Parts {
-		p.accept(m)
+		p.accept(inner)
 	}
+	m.out(blockquotePrefix(inner.endAccepting()))
+}
+
+// blockquotePrefix prefixes each non-empty line of body with "> ", mirroring the
+// Markdown/RDoc block-quote rendering.
+func blockquotePrefix(body string) string {
+	body = strings.TrimRight(body, "\n")
+	lines := strings.Split(body, "\n")
+	for i, ln := range lines {
+		if ln != "" {
+			lines[i] = "> " + ln
+		}
+	}
+	return strings.Join(lines, "\n") + "\n"
 }
 
 func (m *ToMarkdown) acceptRaw(r *Raw) { m.out(strings.Join(r.Parts, "\n")) }

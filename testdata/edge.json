@@ -1,0 +1,112 @@
+{
+  "html": {
+    "verb_header": {
+      "in": "  text\n    = not a header\n",
+      "html": "\n<pre>text\n  = not a header</pre>\n"
+    },
+    "verb_list": {
+      "in": "  intro\n    * item in verbatim\n",
+      "html": "\n<pre>intro\n  * item in verbatim</pre>\n"
+    },
+    "verb_rule": {
+      "in": "  code\n    ---\n",
+      "html": "\n<pre>code\n  ---</pre>\n"
+    },
+    "verb_note": {
+      "in": "  pre\n    label:: x\n",
+      "html": "\n<pre class=\"ruby\"><span class=\"ruby-identifier\">pre</span>\n  <span class=\"ruby-identifier\">label</span><span class=\"ruby-operator\">::</span> <span class=\"ruby-identifier\">x</span>\n</pre>\n"
+    },
+    "backtick": {
+      "in": "use `single' quotes\n",
+      "html": "\n<p>use ‘single’ quotes</p>\n"
+    },
+    "backtick_double": {
+      "in": "``double''\n",
+      "html": "\n<p>“double”</p>\n"
+    },
+    "apostrophe": {
+      "in": "Mary's dog\n",
+      "html": "\n<p>Mary’s dog</p>\n"
+    },
+    "label_empty": {
+      "in": "[only]\n",
+      "html": "<dl class=\"rdoc-list label-list\"><dt>only</dt>\n<dd></dd></dl>\n"
+    },
+    "note_empty": {
+      "in": "only::\n",
+      "html": "<dl class=\"rdoc-list note-list\"><dt>only</dt>\n<dd></dd></dl>\n"
+    },
+    "file_link": {
+      "in": "see {x}[file.rb]\n",
+      "html": "\n<p>see <a href=\"file_rb.html\">x</a></p>\n"
+    },
+    "rdoc_other": {
+      "in": "see rdoc-foo:bar baz\n",
+      "html": "\n<p>see bar baz</p>\n"
+    },
+    "img_link_http": {
+      "in": "{a}[http://x.com/i.png]\n",
+      "html": "\n<p><img src=\"http://x.com/i.png\" /></p>\n"
+    },
+    "lalpha_list": {
+      "in": "a. x\nb. y\n",
+      "html": "<ol style=\"list-style-type: lower-alpha\"><li>\n<p>x</p>\n</li><li>\n<p>y</p>\n</li></ol>\n"
+    },
+    "blockquote_para": {
+      "in": ">>>\n  q1\n\n  q2\n",
+      "html": "\n<blockquote>\n<p>q1</p>\n\n<p>q2</p>\n</blockquote>\n"
+    },
+    "tt_span": {
+      "in": "use <tt>a < b</tt> here\n",
+      "html": "\n<p>use <code>a &lt; b</code> here</p>\n"
+    },
+    "ellipsis4": {
+      "in": "yes....\n",
+      "html": "\n<p>yes.…</p>\n"
+    },
+    "tickquote": {
+      "in": "its 'quoted' word\n",
+      "html": "\n<p>its ‘quoted’ word</p>\n"
+    },
+    "apos_after": {
+      "in": "dogs' bones\n",
+      "html": "\n<p>dogs’ bones</p>\n"
+    },
+    "file_frag": {
+      "in": "see {x}[file.rb#frag]\n",
+      "html": "\n<p>see <a href=\"file_rb.html#frag\">x</a></p>\n"
+    },
+    "header_ws": {
+      "in": "==   \ntext\n",
+      "html": "\n<h2 id=\"label-text\"><a href=\"#label-text\">text</a></h2>\n"
+    },
+    "code_span_html": {
+      "in": "<code>x</code>\n",
+      "html": "\n<p><code>x</code></p>\n"
+    },
+    "crlf_para": {
+      "in": "line one\r\nline two\r\n",
+      "html": "\n<p>line one line two</p>\n"
+    },
+    "crlf_label": {
+      "in": "[a]\r\n  desc\r\n",
+      "html": "<dl class=\"rdoc-list label-list\"><dt>a</dt>\n<dd>\n<p>desc</p>\n</dd></dl>\n"
+    },
+    "label_empty_only": {
+      "in": "[x]\n",
+      "html": "<dl class=\"rdoc-list label-list\"><dt>x</dt>\n<dd></dd></dl>\n"
+    },
+    "footnote": {
+      "in": "text rdoc-label:foottext-1:back\n",
+      "html": "\n<p>text <a id=\"back\" href=\"#foottext-1\">1:back</a></p>\n"
+    },
+    "mismatched_tt": {
+      "in": "a <tt>unclosed here\n",
+      "html": "\n<p>a &lt;tt&gt;unclosed here</p>\n"
+    },
+    "crlf_note": {
+      "in": "a::\r\n  b\r\n",
+      "html": "<dl class=\"rdoc-list note-list\"><dt>a</dt>\n<dd>\n<p>b</p>\n</dd></dl>\n"
+    }
+  }
+}

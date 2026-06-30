@@ -83,6 +83,30 @@
     "minus": {
       "code": "x - 1",
       "html": "<span class=\"ruby-identifier\">x</span> <span class=\"ruby-operator\">-</span> <span class=\"ruby-value\">1</span>"
+    },
+    "interp": {
+      "code": "x = \"a#{b}c\"",
+      "html": "<span class=\"ruby-identifier\">x</span> = <span class=\"ruby-node\">&quot;a#{b}c&quot;</span>"
+    },
+    "escstr": {
+      "code": "s = \"a\\\"b\"",
+      "html": "<span class=\"ruby-identifier\">s</span> = <span class=\"ruby-string\">&quot;a\\&quot;b&quot;</span>"
+    },
+    "escrx": {
+      "code": "r = /a\\/b/",
+      "html": "<span class=\"ruby-identifier\">r</span> = <span class=\"ruby-regexp\">/a\\/b/</span>"
+    },
+    "bang": {
+      "code": "x = a.empty?",
+      "html": "<span class=\"ruby-identifier\">x</span> = <span class=\"ruby-identifier\">a</span>.<span class=\"ruby-identifier\">empty?</span>"
+    },
+    "regex_start": {
+      "code": "/abc/",
+      "html": "<span class=\"ruby-regexp\">/abc/</span>"
+    },
+    "defined": {
+      "code": "defined? x",
+      "html": "<span class=\"ruby-keyword\">defined?</span> <span class=\"ruby-identifier\">x</span>"
     }
   },
   "verbatim": {

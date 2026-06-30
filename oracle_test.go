@@ -192,3 +192,21 @@ func checkMethods(t *testing.T, name string, i int, want oracleCM, got *ClassMod
 		}
 	}
 }
+
+func TestFormatterEdgeOracle(t *testing.T) {
+	var c struct {
+		Rdoc     map[string]struct{ In, Out string }
+		Markdown map[string]struct{ In, Out string }
+	}
+	readJSON(t, "fmt.json", &c)
+	for name, tc := range c.Rdoc {
+		if got := ToRdocString(tc.In); got != tc.Out {
+			t.Errorf("ToRdoc[%s] in=%q\n want %q\n got  %q", name, tc.In, tc.Out, got)
+		}
+	}
+	for name, tc := range c.Markdown {
+		if got := ToMarkdownString(tc.In); got != tc.Out {
+			t.Errorf("ToMarkdown[%s] in=%q\n want %q\n got  %q", name, tc.In, tc.Out, got)
+		}
+	}
+}

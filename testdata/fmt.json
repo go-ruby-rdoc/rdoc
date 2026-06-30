@@ -1,0 +1,82 @@
+{
+  "rdoc": {
+    "blockquote": {
+      "in": ">>>\n  q\n",
+      "out": "> q\n"
+    },
+    "h7": {
+      "in": "======= D\n",
+      "out": "D\n"
+    },
+    "number": {
+      "in": "1. a\n2. b\n",
+      "out": "1. a\n2. b\n"
+    },
+    "note": {
+      "in": "foo:: bar\n",
+      "out": "foo::\n  bar\n\n"
+    },
+    "verbatim_multi": {
+      "in": "  line1\n  line2\n",
+      "out": "  line1\n  line2\n\n"
+    },
+    "blank_para": {
+      "in": "a\n\nb\n",
+      "out": "a\n\nb\n"
+    },
+    "lalpha": {
+      "in": "a. x\nb. y\n",
+      "out": "a. x\nb. y\n"
+    },
+    "rd_ualpha": {
+      "in": "A. x\nB. y\n",
+      "out": "A. x\nB. y\n"
+    },
+    "rd_bullet": {
+      "in": "* a\n* b\n",
+      "out": "* a\n* b\n"
+    }
+  },
+  "markdown": {
+    "blockquote": {
+      "in": ">>>\n  q\n",
+      "out": "> q\n"
+    },
+    "h7": {
+      "in": "======= D\n",
+      "out": "D\n"
+    },
+    "number": {
+      "in": "1. a\n2. b\n",
+      "out": "1.  a\n2.  b\n"
+    },
+    "note": {
+      "in": "foo:: bar\n",
+      "out": "foo\n:   bar\n\n"
+    },
+    "verbatim_multi": {
+      "in": "  line1\n  line2\n",
+      "out": "    line1\n    line2\n\n"
+    },
+    "blank_para": {
+      "in": "a\n\nb\n",
+      "out": "a\n\nb\n"
+    },
+    "lalpha": {
+      "in": "a. x\nb. y\n",
+      "out": "1.  x\n2.  y\n"
+    },
+    "md_bullet": {
+      "in": "* a\n* b\n",
+      "out": "*   a\n*   b\n"
+    },
+    "md_label": {
+      "in": "[k] v\n",
+      "out": "k\n:   v\n\n"
+    },
+    "md_bq_blank": {
+      "in": ">>>\n  p1\n\n  p2\n",
+      "out": "> p1\n\n> p2\n"
+    }
+  }
+}

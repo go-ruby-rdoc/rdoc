@@ -39,11 +39,7 @@ func (h *ToHtml) appendFragment(res *strings.Builder, frag string) {
 	if frag == "" {
 		return
 	}
-	if h.tidyActive {
-		h.tidyBuf.WriteString(frag)
-	} else {
-		res.WriteString(frag)
-	}
+	res.WriteString(frag)
 }
 
 // onTags / offTags emit the opening/closing HTML for attribute changes.
@@ -115,7 +111,9 @@ var (
 )
 
 // handleTidyLink renders "label[url]" / "{label}[url]", mirroring
-// convert_complete_tidy_link for the common (non-spanning) case.
+// convert_complete_tidy_link. Inline markup inside a braced label
+// ("{a *b* c}[url]") renders as plain text rather than nested tags; the gem's
+// fragment-accumulating tidy-link state machine is out of scope.
 func (h *ToHtml) handleTidyLink(text string) string {
 	var m []string
 	if m = reTidyBraces.FindStringSubmatch(text); m == nil {

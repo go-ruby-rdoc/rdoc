@@ -42,11 +42,9 @@ type rubyHL struct {
 	src string
 	pos int
 	out strings.Builder
-	ok  bool
 }
 
 func (h *rubyHL) run() (string, bool) {
-	h.ok = true
 	// afterDef tracks that the previous significant token was `def`, so the
 	// next identifier becomes a method title (ruby-identifier ruby-title).
 	afterDef := false
@@ -74,6 +72,10 @@ func (h *rubyHL) run() (string, bool) {
 			h.span("ruby-ivar", h.scanVar())
 		case c == '@' || c == '$':
 			h.span("ruby-identifier", h.scanVar())
+		case c == ':' && h.pos+1 < len(h.src) && h.src[h.pos+1] == ':':
+			// scope-resolution operator "::"
+			h.span("ruby-operator", "::")
+			h.pos += 2
 		case c == ':' && h.isSymbolStart():
 			h.span("ruby-value", h.scanSymbol())
 		case isDigit(c):
@@ -115,9 +117,6 @@ func (h *rubyHL) run() (string, bool) {
 			// any other punctuation passes through escaped and unwrapped
 			h.out.WriteString(escapeHTML(string(c)))
 			h.pos++
-		}
-		if !h.ok {
-			return "", false
 		}
 		afterDef = afterDef && (c == ' ' || c == '\t')
 	}

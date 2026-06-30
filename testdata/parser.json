@@ -1,0 +1,48 @@
+{
+  "html": {
+    "label_continue": {
+      "in": "[a]\n[b]\n  desc b\n",
+      "html": "<dl class=\"rdoc-list label-list\"><dt>a</dt>\n<dt>b</dt>\n<dd>\n<p>desc b</p>\n</dd></dl>\n"
+    },
+    "note_empty_end": {
+      "in": "x::\n",
+      "html": "<dl class=\"rdoc-list note-list\"><dt>x</dt>\n<dd></dd></dl>\n"
+    },
+    "label_diff_type": {
+      "in": "[a]\n* bullet\n",
+      "html": "<dl class=\"rdoc-list label-list\"><dt>a</dt>\n<dd></dd></dl>\n<ul><li>\n<p>bullet</p>\n</li></ul>\n"
+    },
+    "blockquote_text": {
+      "in": ">>> word\nquoted\n",
+      "html": "\n<blockquote>\n<p>quoted</p>\n</blockquote>\n"
+    },
+    "list_then_outdent": {
+      "in": "* item\nback to para\n",
+      "html": "<ul><li>\n<p>item</p>\n</li></ul>\n\n<p>back to para</p>\n"
+    },
+    "rule_then_text": {
+      "in": "---\ntext\n",
+      "html": "<hr>\n\n<p>text</p>\n"
+    },
+    "nested_then_para": {
+      "in": "* a\n\n  para in item\n",
+      "html": "<ul><li>\n<p>a</p>\n\n<p>para in item</p>\n</li></ul>\n"
+    },
+    "label_multi_para": {
+      "in": "[x]\n  para one\n\n  para two\n",
+      "html": "<dl class=\"rdoc-list label-list\"><dt>x</dt>\n<dd>\n<p>para one</p>\n\n<p>para two</p>\n</dd></dl>\n"
+    },
+    "deep_unindent": {
+      "in": "    deeply\n  less\n",
+      "html": "\n<pre class=\"ruby\">  <span class=\"ruby-identifier\">deeply</span>\n<span class=\"ruby-identifier\">less</span>\n</pre>\n"
+    },
+    "header_empty": {
+      "in": "==\ntext\n",
+      "html": "\n<h2 id=\"label-\"><a href=\"#label-\"></a></h2>\n\n<p>text</p>\n"
+    },
+    "consecutive_labels": {
+      "in": "[a] one\n[b] two\n[c] three\n",
+      "html": "<dl class=\"rdoc-list label-list\"><dt>a</dt>\n<dd>\n<p>one</p>\n</dd><dt>b</dt>\n<dd>\n<p>two</p>\n</dd><dt>c</dt>\n<dd>\n<p>three</p>\n</dd></dl>\n"
+    }
+  }
+}

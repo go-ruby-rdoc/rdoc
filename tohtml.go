@@ -57,10 +57,6 @@ type ToHtml struct {
 	inListEntry []string
 	list        []ListType
 	crossref    bool
-
-	// tidy-link accumulation state (for "{label}[url]" spanning fragments)
-	tidyBuf    *strings.Builder
-	tidyActive bool
 }
 
 // regexp-handler attribute bits for the HTML formatter, allocated above the

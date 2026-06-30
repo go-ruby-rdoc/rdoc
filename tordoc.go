@@ -52,7 +52,8 @@ func (r *ToRdoc) acceptRule(*Rule) { r.out(strings.Repeat("-", 78) + "\n") }
 func (r *ToRdoc) acceptHeading(h *Heading) {
 	level := h.Level
 	if level > 6 {
-		level = 6
+		r.out(rdocInline(h.Text) + "\n")
+		return
 	}
 	r.out(strings.Repeat("=", level) + " " + rdocInline(h.Text) + "\n")
 }
@@ -60,9 +61,12 @@ func (r *ToRdoc) acceptHeading(h *Heading) {
 func (r *ToRdoc) acceptBlankLine(*BlankLine) { r.out("\n") }
 
 func (r *ToRdoc) acceptBlockQuote(b *BlockQuote) {
+	inner := NewToRdoc()
+	inner.startAccepting()
 	for _, p := range b.Parts {
-		p.accept(r)
+		p.accept(inner)
 	}
+	r.out(blockquotePrefix(inner.endAccepting()))
 }
 
 func (r *ToRdoc) acceptRaw(raw *Raw) { r.out(strings.Join(raw.Parts, "\n")) }
@@ -71,8 +75,12 @@ func (r *ToRdoc) acceptListStart(l *List) {
 	switch l.Type {
 	case ListBullet:
 		r.listMarker = append(r.listMarker, "* ")
-	case ListNumber, ListLalpha, ListUalpha:
+	case ListNumber:
 		r.listMarker = append(r.listMarker, "1. ")
+	case ListLalpha:
+		r.listMarker = append(r.listMarker, "a. ")
+	case ListUalpha:
+		r.listMarker = append(r.listMarker, "A. ")
 	case ListNote:
 		r.listMarker = append(r.listMarker, "note")
 	default:
@@ -95,6 +103,9 @@ func (r *ToRdoc) acceptListItemStart(it *ListItem) {
 	case "1. ":
 		r.listIndex[len(r.listIndex)-1]++
 		r.out(itoaN(r.listIndex[len(r.listIndex)-1]) + ". ")
+	case "a. ", "A. ":
+		r.listIndex[len(r.listIndex)-1]++
+		r.out(alphaMarker(marker[0], r.listIndex[len(r.listIndex)-1]) + ". ")
 	case "label":
 		for _, lbl := range it.Label {
 			r.out("[" + rdocInline(lbl) + "]\n")
@@ -111,6 +122,13 @@ func (r *ToRdoc) acceptListItemStart(it *ListItem) {
 }
 
 func (r *ToRdoc) acceptListItemEnd(*ListItem) {}
+
+// alphaMarker returns the n-th (1-based) alphabetic ordinal starting at base
+// ('a' or 'A'), wrapping a..z (RDoc does not go beyond single letters in
+// practice for the corpus we target).
+func alphaMarker(base byte, n int) string {
+	return string(base + byte((n-1)%26))
+}
 
 // rdocInline maps the inline flow to RDoc HTML-style tags (<b>/<em>/<tt>).
 func rdocInline(text string) string {

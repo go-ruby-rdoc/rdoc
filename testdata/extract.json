@@ -1,0 +1,367 @@
+{
+  "basic": {
+    "src": "# C doc\nclass C\n  # m doc\n  def m(x); end\nend\n",
+    "cms": [
+      {
+        "module": false,
+        "name": "C",
+        "full_name": "C",
+        "comment": "C doc",
+        "methods": [
+          {
+            "name": "m",
+            "params": "(x)",
+            "singleton": false,
+            "vis": "public",
+            "comment": "m doc",
+            "call_seq": ""
+          }
+        ],
+        "constants": [],
+        "attrs": []
+      }
+    ]
+  },
+  "nested_block": {
+    "src": "class D\n  def loop_it\n    [1,2].each do |i|\n      puts i\n    end\n  end\n  def after; end\nend\n",
+    "cms": [
+      {
+        "module": false,
+        "name": "D",
+        "full_name": "D",
+        "comment": "",
+        "methods": [
+          {
+            "name": "loop_it",
+            "params": "()",
+            "singleton": false,
+            "vis": "public",
+            "comment": "",
+            "call_seq": ""
+          },
+          {
+            "name": "after",
+            "params": "()",
+            "singleton": false,
+            "vis": "public",
+            "comment": "",
+            "call_seq": ""
+          }
+        ],
+        "constants": [],
+        "attrs": []
+      }
+    ]
+  },
+  "visibility": {
+    "src": "class E\n  def a; end\n  protected\n  def b; end\n  public\n  def c; end\nend\n",
+    "cms": [
+      {
+        "module": false,
+        "name": "E",
+        "full_name": "E",
+        "comment": "",
+        "methods": [
+          {
+            "name": "a",
+            "params": "()",
+            "singleton": false,
+            "vis": "public",
+            "comment": "",
+            "call_seq": ""
+          },
+          {
+            "name": "b",
+            "params": "()",
+            "singleton": false,
+            "vis": "protected",
+            "comment": "",
+            "call_seq": ""
+          },
+          {
+            "name": "c",
+            "params": "()",
+            "singleton": false,
+            "vis": "public",
+            "comment": "",
+            "call_seq": ""
+          }
+        ],
+        "constants": [],
+        "attrs": []
+      }
+    ]
+  },
+  "attrs": {
+    "src": "class F\n  attr_accessor :x, :y\n  attr_writer :z\n  attr_reader :r\nend\n",
+    "cms": [
+      {
+        "module": false,
+        "name": "F",
+        "full_name": "F",
+        "comment": "",
+        "methods": [],
+        "constants": [],
+        "attrs": [
+          {
+            "name": "x",
+            "rw": "RW",
+            "vis": "public"
+          },
+          {
+            "name": "y",
+            "rw": "RW",
+            "vis": "public"
+          },
+          {
+            "name": "z",
+            "rw": "W",
+            "vis": "public"
+          },
+          {
+            "name": "r",
+            "rw": "R",
+            "vis": "public"
+          }
+        ]
+      }
+    ]
+  },
+  "subclass": {
+    "src": "class G < Base\nend\n",
+    "cms": [
+      {
+        "module": false,
+        "name": "G",
+        "full_name": "G",
+        "comment": "",
+        "methods": [],
+        "constants": [],
+        "attrs": []
+      }
+    ]
+  },
+  "module": {
+    "src": "# mod\nmodule M\n  def self.s; end\n  def i; end\nend\n",
+    "cms": [
+      {
+        "module": true,
+        "name": "M",
+        "full_name": "M",
+        "comment": "mod",
+        "methods": [
+          {
+            "name": "s",
+            "params": "()",
+            "singleton": true,
+            "vis": "public",
+            "comment": "",
+            "call_seq": ""
+          },
+          {
+            "name": "i",
+            "params": "()",
+            "singleton": false,
+            "vis": "public",
+            "comment": "",
+            "call_seq": ""
+          }
+        ],
+        "constants": [],
+        "attrs": []
+      }
+    ]
+  },
+  "qualified": {
+    "src": "class A::B\n  def m; end\nend\n",
+    "cms": [
+      {
+        "module": true,
+        "name": "A",
+        "full_name": "A",
+        "comment": "",
+        "methods": [],
+        "constants": [],
+        "attrs": []
+      }
+    ]
+  },
+  "callseq": {
+    "src": "##\n# A method.\n#\n# call-seq:\n#   f(x) -> int\n#\n# More.\ndef f(*a); end\nclass H\n  def g; end\nend\n",
+    "cms": [
+      {
+        "module": false,
+        "name": "H",
+        "full_name": "H",
+        "comment": "",
+        "methods": [
+          {
+            "name": "g",
+            "params": "()",
+            "singleton": false,
+            "vis": "public",
+            "comment": "",
+            "call_seq": ""
+          }
+        ],
+        "constants": [],
+        "attrs": []
+      }
+    ]
+  },
+  "const": {
+    "src": "class I\n  # the pi\n  PI = 3.14159\n  E = 2.718\nend\n",
+    "cms": [
+      {
+        "module": false,
+        "name": "I",
+        "full_name": "I",
+        "comment": "",
+        "methods": [],
+        "constants": [
+          {
+            "name": "PI",
+            "value": "3.14159",
+            "comment": "the pi"
+          },
+          {
+            "name": "E",
+            "value": "2.718",
+            "comment": ""
+          }
+        ],
+        "attrs": []
+      }
+    ]
+  },
+  "if_block": {
+    "src": "class J\n  def cond\n    if x\n      1\n    else\n      2\n    end\n  end\nend\n",
+    "cms": [
+      {
+        "module": false,
+        "name": "J",
+        "full_name": "J",
+        "comment": "",
+        "methods": [
+          {
+            "name": "cond",
+            "params": "()",
+            "singleton": false,
+            "vis": "public",
+            "comment": "",
+            "call_seq": ""
+          }
+        ],
+        "constants": [],
+        "attrs": []
+      }
+    ]
+  },
+  "private_section": {
+    "src": "class K\n  def pub; end\n  private\n  def pri1; end\n  def pri2; end\nend\n",
+    "cms": [
+      {
+        "module": false,
+        "name": "K",
+        "full_name": "K",
+        "comment": "",
+        "methods": [
+          {
+            "name": "pub",
+            "params": "()",
+            "singleton": false,
+            "vis": "public",
+            "comment": "",
+            "call_seq": ""
+          },
+          {
+            "name": "pri1",
+            "params": "()",
+            "singleton": false,
+            "vis": "private",
+            "comment": "",
+            "call_seq": ""
+          },
+          {
+            "name": "pri2",
+            "params": "()",
+            "singleton": false,
+            "vis": "private",
+            "comment": "",
+            "call_seq": ""
+          }
+        ],
+        "constants": [],
+        "attrs": []
+      }
+    ]
+  },
+  "operator_method": {
+    "src": "class L\n  def +(o); end\n  def ==(o); end\nend\n",
+    "cms": [
+      {
+        "module": false,
+        "name": "L",
+        "full_name": "L",
+        "comment": "",
+        "methods": [
+          {
+            "name": "+",
+            "params": "(o)",
+            "singleton": false,
+            "vis": "public",
+            "comment": "",
+            "call_seq": ""
+          },
+          {
+            "name": "==",
+            "params": "(o)",
+            "singleton": false,
+            "vis": "public",
+            "comment": "",
+            "call_seq": ""
+          }
+        ],
+        "constants": [],
+        "attrs": []
+      }
+    ]
+  },
+  "empty_class": {
+    "src": "class Empty\nend\n",
+    "cms": [
+      {
+        "module": false,
+        "name": "Empty",
+        "full_name": "Empty",
+        "comment": "",
+        "methods": [],
+        "constants": [],
+        "attrs": []
+      }
+    ]
+  },
+  "block_comment": {
+    "src": "=begin\nnot doc\n=end\nclass N\n  def x; end\nend\n",
+    "cms": [
+      {
+        "module": false,
+        "name": "N",
+        "full_name": "N",
+        "comment": "not doc",
+        "methods": [
+          {
+            "name": "x",
+            "params": "()",
+            "singleton": false,
+            "vis": "public",
+            "comment": "",
+            "call_seq": ""
+          }
+        ],
+        "constants": [],
+        "attrs": []
+      }
+    ]
+  }
+}

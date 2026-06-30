@@ -1,0 +1,406 @@
+{
+  "html": {
+    "h1": {
+      "in": "= Heading One\n",
+      "html": "\n<h1 id=\"label-Heading+One\"><a href=\"#label-Heading+One\">Heading One</a></h1>\n"
+    },
+    "h2": {
+      "in": "== Heading Two\n",
+      "html": "\n<h2 id=\"label-Heading+Two\"><a href=\"#label-Heading+Two\">Heading Two</a></h2>\n"
+    },
+    "h_levels": {
+      "in": "= a\n== b\n=== c\n==== d\n===== e\n====== f\n======= g\n",
+      "html": "\n<h1 id=\"label-a\"><a href=\"#label-a\">a</a></h1>\n\n<h2 id=\"label-b\"><a href=\"#label-b\">b</a></h2>\n\n<h3 id=\"label-c\"><a href=\"#label-c\">c</a></h3>\n\n<h4 id=\"label-d\"><a href=\"#label-d\">d</a></h4>\n\n<h5 id=\"label-e\"><a href=\"#label-e\">e</a></h5>\n\n<h6 id=\"label-f\"><a href=\"#label-f\">f</a></h6>\n\n<h6 id=\"label-g\"><a href=\"#label-g\">g</a></h6>\n"
+    },
+    "para": {
+      "in": "Just a simple paragraph here.\n",
+      "html": "\n<p>Just a simple paragraph here.</p>\n"
+    },
+    "para_multiline": {
+      "in": "line one\nline two\nline three\n",
+      "html": "\n<p>line one line two line three</p>\n"
+    },
+    "para_break": {
+      "in": "line one  \nline two\n",
+      "html": "\n<p>line one</p>\n\n<p>line two</p>\n"
+    },
+    "inline_bold": {
+      "in": "A *bold* word.\n",
+      "html": "\n<p>A <strong>bold</strong> word.</p>\n"
+    },
+    "inline_em": {
+      "in": "An _emphasis_ word.\n",
+      "html": "\n<p>An <em>emphasis</em> word.</p>\n"
+    },
+    "inline_tt": {
+      "in": "A +code+ word.\n",
+      "html": "\n<p>A <code>code</code> word.</p>\n"
+    },
+    "inline_all": {
+      "in": "Mix *bold* _em_ +tt+ together.\n",
+      "html": "\n<p>Mix <strong>bold</strong> <em>em</em> <code>tt</code> together.</p>\n"
+    },
+    "inline_html": {
+      "in": "Use <b>bold</b> <i>it</i> <em>e</em> <tt>t</tt> <code>c</code>.\n",
+      "html": "\n<p>Use <strong>bold</strong> <em>it</em> <em>e</em> <code>t</code> <code>c</code>.</p>\n"
+    },
+    "bullet": {
+      "in": "* one\n* two\n* three\n",
+      "html": "<ul><li>\n<p>one</p>\n</li><li>\n<p>two</p>\n</li><li>\n<p>three</p>\n</li></ul>\n"
+    },
+    "bullet_dash": {
+      "in": "- one\n- two\n",
+      "html": "<ul><li>\n<p>one</p>\n</li><li>\n<p>two</p>\n</li></ul>\n"
+    },
+    "number": {
+      "in": "1. one\n2. two\n",
+      "html": "<ol><li>\n<p>one</p>\n</li><li>\n<p>two</p>\n</li></ol>\n"
+    },
+    "lalpha": {
+      "in": "a. one\nb. two\n",
+      "html": "<ol style=\"list-style-type: lower-alpha\"><li>\n<p>one</p>\n</li><li>\n<p>two</p>\n</li></ol>\n"
+    },
+    "ualpha": {
+      "in": "A. one\nB. two\n",
+      "html": "<ol style=\"list-style-type: upper-alpha\"><li>\n<p>one</p>\n</li><li>\n<p>two</p>\n</li></ol>\n"
+    },
+    "label": {
+      "in": "[cat] feline\n[dog] canine\n",
+      "html": "<dl class=\"rdoc-list label-list\"><dt>cat</dt>\n<dd>\n<p>feline</p>\n</dd><dt>dog</dt>\n<dd>\n<p>canine</p>\n</dd></dl>\n"
+    },
+    "note": {
+      "in": "cat:: feline\ndog:: canine\n",
+      "html": "<dl class=\"rdoc-list note-list\"><dt>cat</dt>\n<dd>\n<p>feline</p>\n</dd><dt>dog</dt>\n<dd>\n<p>canine</p>\n</dd></dl>\n"
+    },
+    "nested_list": {
+      "in": "* outer\n  * inner a\n  * inner b\n* outer two\n",
+      "html": "<ul><li>\n<p>outer</p>\n<ul><li>\n<p>inner a</p>\n</li><li>\n<p>inner b</p>\n</li></ul>\n</li><li>\n<p>outer two</p>\n</li></ul>\n"
+    },
+    "rule": {
+      "in": "above\n\n---\n\nbelow\n",
+      "html": "\n<p>above</p>\n<hr>\n\n<p>below</p>\n"
+    },
+    "tidylink": {
+      "in": "See {the docs}[https://example.com].\n",
+      "html": "\n<p>See <a href=\"https://example.com\">the docs</a>.</p>\n"
+    },
+    "tidylink_word": {
+      "in": "See docs[https://example.com].\n",
+      "html": "\n<p>See <a href=\"https://example.com\">docs</a>.</p>\n"
+    },
+    "bare_url": {
+      "in": "Go to http://example.com now.\n",
+      "html": "\n<p>Go to <a href=\"http://example.com\">example.com</a> now.</p>\n"
+    },
+    "rdoc_ref": {
+      "in": "See rdoc-ref:Foo::Bar for more.\n",
+      "html": "\n<p>See Foo::Bar for more.</p>\n"
+    },
+    "rdoc_label": {
+      "in": "see rdoc-label:foo for x\n",
+      "html": "\n<p>see <a href=\"#foo\">foo</a> for x</p>\n"
+    },
+    "blockquote": {
+      "in": ">>>\nquoted text here\n",
+      "html": "\n<blockquote>\n<p>quoted text here</p>\n</blockquote>\n"
+    },
+    "smart_quotes": {
+      "in": "He said \"hello\" and 'world'.\n",
+      "html": "\n<p>He said “hello” and ‘world’.</p>\n"
+    },
+    "dashes": {
+      "in": "a -- b --- c ... d\n",
+      "html": "\n<p>a – b — c … d</p>\n"
+    },
+    "copyright": {
+      "in": "(c) 2026 (r) ltd.\n",
+      "html": "\n<p>© 2026 ® ltd.</p>\n"
+    },
+    "escaped": {
+      "in": "A \\*not bold\\* word.\n",
+      "html": "\n<p>A *not bold* word.</p>\n"
+    },
+    "protect_send": {
+      "in": "Call __send__ method.\n",
+      "html": "\n<p>Call __send__ method.</p>\n"
+    },
+    "html_entities": {
+      "in": "Use & < > chars here.\n",
+      "html": "\n<p>Use &amp; &lt; &gt; chars here.</p>\n"
+    },
+    "blank_lines": {
+      "in": "para one\n\n\npara two\n",
+      "html": "\n<p>para one</p>\n\n<p>para two</p>\n"
+    },
+    "heading_with_inline": {
+      "in": "= A *bold* heading\n",
+      "html": "\n<h1 id=\"label-A+bold+heading\"><a href=\"#label-A+bold+heading\">A <strong>bold</strong> heading</a></h1>\n"
+    },
+    "empty": {
+      "in": "",
+      "html": ""
+    },
+    "image_link": {
+      "in": "{logo}[https://x.com/a.png]\n",
+      "html": "\n<p><img src=\"https://x.com/a.png\" /></p>\n"
+    },
+    "labeled_multiline": {
+      "in": "[one]\n  desc one\n[two]\n  desc two\n",
+      "html": "<dl class=\"rdoc-list label-list\"><dt>one</dt>\n<dd>\n<p>desc one</p>\n</dd><dt>two</dt>\n<dd>\n<p>desc two</p>\n</dd></dl>\n"
+    },
+    "note_block": {
+      "in": "foo::\n  the foo\nbar::\n  the bar\n",
+      "html": "<dl class=\"rdoc-list note-list\"><dt>foo</dt>\n<dd>\n<p>the foo</p>\n</dd><dt>bar</dt>\n<dd>\n<p>the bar</p>\n</dd></dl>\n"
+    },
+    "deep_nest": {
+      "in": "* a\n  * b\n    * c\n",
+      "html": "<ul><li>\n<p>a</p>\n<ul><li>\n<p>b</p>\n<ul><li>\n<p>c</p>\n</li></ul>\n</li></ul>\n</li></ul>\n"
+    },
+    "mixed_para_list": {
+      "in": "intro para\n\n* item\n\noutro para\n",
+      "html": "\n<p>intro para</p>\n<ul><li>\n<p>item</p>\n</li></ul>\n\n<p>outro para</p>\n"
+    },
+    "rule_weight": {
+      "in": "-----\n",
+      "html": "<hr>\n"
+    },
+    "tt_inline": {
+      "in": "Use +foo.bar+ and +x+.\n",
+      "html": "\n<p>Use <code>foo.bar</code> and <code>x</code>.</p>\n"
+    },
+    "bold_phrase": {
+      "in": "<b>bold phrase here</b> ok\n",
+      "html": "\n<p><strong>bold phrase here</strong> ok</p>\n"
+    },
+    "em_tag": {
+      "in": "<em>emphasis</em> and <i>italic</i>\n",
+      "html": "\n<p><em>emphasis</em> and <em>italic</em></p>\n"
+    },
+    "nested_inline": {
+      "in": "*a* _b_ +c+ together\n",
+      "html": "\n<p><strong>a</strong> <em>b</em> <code>c</code> together</p>\n"
+    },
+    "escaped_star": {
+      "in": "a \\*b\\* c\n",
+      "html": "\n<p>a *b* c</p>\n"
+    },
+    "underscore_word": {
+      "in": "my_method_name and _real emphasis_\n",
+      "html": "\n<p>my_method_name and _real emphasis_</p>\n"
+    },
+    "link_scheme": {
+      "in": "mailto:foo@bar.com and ftp:host\n",
+      "html": "\n<p><a href=\"mailto:foo@bar.com\">foo@bar.com</a> and <a href=\"ftp:host\">host</a></p>\n"
+    },
+    "www_link": {
+      "in": "visit www.example.com today\n",
+      "html": "\n<p>visit <a href=\"www.example.com\">www.example.com</a> today</p>\n"
+    },
+    "two_paras": {
+      "in": "first\n\nsecond\n",
+      "html": "\n<p>first</p>\n\n<p>second</p>\n"
+    },
+    "header_then_para": {
+      "in": "= Title\n\nbody text\n",
+      "html": "\n<h1 id=\"label-Title\"><a href=\"#label-Title\">Title</a></h1>\n\n<p>body text</p>\n"
+    },
+    "list_then_header": {
+      "in": "* item\n\n= Header\n",
+      "html": "<ul><li>\n<p>item</p>\n</li></ul>\n\n<h1 id=\"label-Header\"><a href=\"#label-Header\">Header</a></h1>\n"
+    },
+    "code_with_html": {
+      "in": "Text <code>a < b</code> end\n",
+      "html": "\n<p>Text <code>a &lt; b</code> end</p>\n"
+    },
+    "amp_in_text": {
+      "in": "Tom & Jerry\n",
+      "html": "\n<p>Tom &amp; Jerry</p>\n"
+    },
+    "hard_break": {
+      "in": "line a  \nline b\n",
+      "html": "\n<p>line a</p>\n\n<p>line b</p>\n"
+    },
+    "trailing_ws_para": {
+      "in": "word   \n",
+      "html": "\n<p>word</p>\n"
+    },
+    "lalpha_multi": {
+      "in": "a. first\nb. second\nc. third\n",
+      "html": "<ol style=\"list-style-type: lower-alpha\"><li>\n<p>first</p>\n</li><li>\n<p>second</p>\n</li><li>\n<p>third</p>\n</li></ol>\n"
+    },
+    "number_long": {
+      "in": "1. one\n2. two\n3. three\n4. four\n",
+      "html": "<ol><li>\n<p>one</p>\n</li><li>\n<p>two</p>\n</li><li>\n<p>three</p>\n</li><li>\n<p>four</p>\n</li></ol>\n"
+    },
+    "label_inline_markup": {
+      "in": "[*x*] desc\n",
+      "html": "<dl class=\"rdoc-list label-list\"><dt><strong>x</strong></dt>\n<dd>\n<p>desc</p>\n</dd></dl>\n"
+    },
+    "para_with_url_mid": {
+      "in": "go http://x.com/p?a=1&b=2 ok\n",
+      "html": "\n<p>go <a href=\"http://x.com/p?a=1&amp;b=2\">x.com/p?a=1&amp;b=2</a> ok</p>\n"
+    },
+    "ellipsis": {
+      "in": "wait... really\n",
+      "html": "\n<p>wait… really</p>\n"
+    },
+    "mixed_quotes": {
+      "in": "\"a\" 'b' ``c'' `d'\n",
+      "html": "\n<p>“a” ‘b’ “c” ‘d’</p>\n"
+    },
+    "consecutive_bold": {
+      "in": "*a**b*\n",
+      "html": "\n<p><strong>ab</strong></p>\n"
+    },
+    "tidy_image_label": {
+      "in": "{rdoc-image:logo.png}[https://x.com]\n",
+      "html": "\n<p><a href=\"https://x.com\"><img src=\"logo.png\"></a></p>\n"
+    },
+    "ualpha_link": {
+      "in": "see A[http://a.com]\n",
+      "html": "\n<p>see <a href=\"http://a.com\">A</a></p>\n"
+    }
+  },
+  "labels": {
+    "simple": {
+      "in": "Heading One",
+      "label": "Heading+One"
+    },
+    "slash": {
+      "in": "A B/C.d!",
+      "label": "A+B-2FC.d-21"
+    },
+    "spaces": {
+      "in": "Foo Bar",
+      "label": "Foo+Bar"
+    },
+    "special": {
+      "in": "method?",
+      "label": "method-3F"
+    },
+    "unicode": {
+      "in": "café",
+      "label": "caf-C3-A9"
+    },
+    "tidy": {
+      "in": "{x}[y]",
+      "label": "x"
+    },
+    "empty": {
+      "in": "",
+      "label": ""
+    },
+    "amp": {
+      "in": "a & b",
+      "label": "a+-26+b"
+    }
+  },
+  "rdoc": {
+    "para": {
+      "in": "Hello world here.\n",
+      "out": "Hello world here.\n"
+    },
+    "heading": {
+      "in": "= Title\n",
+      "out": "= Title\n"
+    },
+    "h2": {
+      "in": "== Sub\n",
+      "out": "== Sub\n"
+    },
+    "bullet": {
+      "in": "* a\n* b\n",
+      "out": "* a\n* b\n"
+    },
+    "number": {
+      "in": "1. x\n2. y\n",
+      "out": "1. x\n2. y\n"
+    },
+    "bold": {
+      "in": "a *b* c\n",
+      "out": "a <b>b</b> c\n"
+    },
+    "verbatim": {
+      "in": "  code line\n",
+      "out": "  code line\n\n"
+    },
+    "rule": {
+      "in": "---\n",
+      "out": "------------------------------------------------------------------------------\n"
+    },
+    "label": {
+      "in": "[k] v\n",
+      "out": "[k]\n  v\n\n"
+    },
+    "note": {
+      "in": "foo:: bar\n",
+      "out": "foo::\n  bar\n\n"
+    },
+    "mixed_inline": {
+      "in": "a *b* _c_ +d+\n",
+      "out": "a <b>b</b> <em>c</em> <tt>d</tt>\n"
+    },
+    "longpara": {
+      "in": "This is a longer paragraph that should certainly exceed the seventy six character wrap limit used by the rdoc formatter for sure yes.\n",
+      "out": "This is a longer paragraph that should certainly exceed the seventy six\ncharacter wrap limit used by the rdoc formatter for sure yes.\n"
+    },
+    "h3": {
+      "in": "=== Three\n",
+      "out": "=== Three\n"
+    }
+  },
+  "markdown": {
+    "para": {
+      "in": "Hello world here.\n",
+      "out": "Hello world here.\n"
+    },
+    "heading": {
+      "in": "= Title\n",
+      "out": "# Title\n"
+    },
+    "h2": {
+      "in": "== Sub\n",
+      "out": "## Sub\n"
+    },
+    "bullet": {
+      "in": "* a\n* b\n",
+      "out": "*   a\n*   b\n"
+    },
+    "number": {
+      "in": "1. x\n2. y\n",
+      "out": "1.  x\n2.  y\n"
+    },
+    "bold": {
+      "in": "a *b* c\n",
+      "out": "a **b** c\n"
+    },
+    "verbatim": {
+      "in": "  code line\n",
+      "out": "    code line\n\n"
+    },
+    "rule": {
+      "in": "---\n",
+      "out": "---\n"
+    },
+    "label": {
+      "in": "[k] v\n",
+      "out": "k\n:   v\n\n"
+    },
+    "note": {
+      "in": "foo:: bar\n",
+      "out": "foo\n:   bar\n\n"
+    },
+    "mixed_inline": {
+      "in": "a *b* _c_ +d+\n",
+      "out": "a **b** *c* `d`\n"
+    },
+    "longpara": {
+      "in": "This is a longer paragraph that should certainly exceed the seventy six character wrap limit used by the rdoc formatter for sure yes.\n",
+      "out": "This is a longer paragraph that should certainly exceed the seventy six\ncharacter wrap limit used by the rdoc formatter for sure yes.\n"
+    },
+    "h3": {
+      "in": "=== Three\n",
+      "out": "### Three\n"
+    }
+  }
+}

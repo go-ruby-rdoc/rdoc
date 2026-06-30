@@ -1,0 +1,126 @@
+{
+  "hl": {
+    "ident": {
+      "code": "x",
+      "html": "<span class=\"ruby-identifier\">x</span>"
+    },
+    "assign": {
+      "code": "x = 1 + 2",
+      "html": "<span class=\"ruby-identifier\">x</span> = <span class=\"ruby-value\">1</span> <span class=\"ruby-operator\">+</span> <span class=\"ruby-value\">2</span>"
+    },
+    "puts": {
+      "code": "puts x",
+      "html": "<span class=\"ruby-identifier\">puts</span> <span class=\"ruby-identifier\">x</span>"
+    },
+    "string": {
+      "code": "a = \"hello\"",
+      "html": "<span class=\"ruby-identifier\">a</span> = <span class=\"ruby-string\">&quot;hello&quot;</span>"
+    },
+    "symbol": {
+      "code": "a = :sym",
+      "html": "<span class=\"ruby-identifier\">a</span> = <span class=\"ruby-value\">:sym</span>"
+    },
+    "keyword": {
+      "code": "def foo; end",
+      "html": "<span class=\"ruby-keyword\">def</span> <span class=\"ruby-identifier ruby-title\">foo</span>; <span class=\"ruby-keyword\">end</span>"
+    },
+    "method_def": {
+      "code": "def bar(a, b)\n  a + b\nend",
+      "html": "<span class=\"ruby-keyword\">def</span> <span class=\"ruby-identifier ruby-title\">bar</span>(<span class=\"ruby-identifier\">a</span>, <span class=\"ruby-identifier\">b</span>)\n  <span class=\"ruby-identifier\">a</span> <span class=\"ruby-operator\">+</span> <span class=\"ruby-identifier\">b</span>\n<span class=\"ruby-keyword\">end</span>"
+    },
+    "class": {
+      "code": "class Foo\n  def x; end\nend",
+      "html": "<span class=\"ruby-keyword\">class</span> <span class=\"ruby-constant\">Foo</span>\n  <span class=\"ruby-keyword\">def</span> <span class=\"ruby-identifier ruby-title\">x</span>; <span class=\"ruby-keyword\">end</span>\n<span class=\"ruby-keyword\">end</span>"
+    },
+    "comment": {
+      "code": "x = 1 # comment",
+      "html": "<span class=\"ruby-identifier\">x</span> = <span class=\"ruby-value\">1</span> <span class=\"ruby-comment\"># comment</span>"
+    },
+    "ivar": {
+      "code": "@foo = 1",
+      "html": "<span class=\"ruby-ivar\">@foo</span> = <span class=\"ruby-value\">1</span>"
+    },
+    "constant": {
+      "code": "PI = 3.14",
+      "html": "<span class=\"ruby-constant\">PI</span> = <span class=\"ruby-value\">3.14</span>"
+    },
+    "regexp": {
+      "code": "x =~ /abc/",
+      "html": "<span class=\"ruby-identifier\">x</span> <span class=\"ruby-operator\">=~</span> <span class=\"ruby-regexp\">/abc/</span>"
+    },
+    "array": {
+      "code": "a = [1, 2, 3]",
+      "html": "<span class=\"ruby-identifier\">a</span> = [<span class=\"ruby-value\">1</span>, <span class=\"ruby-value\">2</span>, <span class=\"ruby-value\">3</span>]"
+    },
+    "hash": {
+      "code": "h = {a: 1}",
+      "html": "<span class=\"ruby-identifier\">h</span> = {<span class=\"ruby-value\">a:</span> <span class=\"ruby-value\">1</span>}"
+    },
+    "if": {
+      "code": "if x then y end",
+      "html": "<span class=\"ruby-keyword\">if</span> <span class=\"ruby-identifier\">x</span> <span class=\"ruby-keyword\">then</span> <span class=\"ruby-identifier\">y</span> <span class=\"ruby-keyword\">end</span>"
+    },
+    "float": {
+      "code": "f = 1.5e3",
+      "html": "<span class=\"ruby-identifier\">f</span> = <span class=\"ruby-value\">1.5e3</span>"
+    },
+    "true_nil": {
+      "code": "a = true; b = nil",
+      "html": "<span class=\"ruby-identifier\">a</span> = <span class=\"ruby-keyword\">true</span>; <span class=\"ruby-identifier\">b</span> = <span class=\"ruby-keyword\">nil</span>"
+    },
+    "gvar": {
+      "code": "$g = 1",
+      "html": "<span class=\"ruby-identifier\">$g</span> = <span class=\"ruby-value\">1</span>"
+    },
+    "cvar": {
+      "code": "@@c = 2",
+      "html": "<span class=\"ruby-identifier\">@@c</span> = <span class=\"ruby-value\">2</span>"
+    },
+    "ops": {
+      "code": "a <= b && c",
+      "html": "<span class=\"ruby-identifier\">a</span> <span class=\"ruby-operator\">&lt;=</span> <span class=\"ruby-identifier\">b</span> <span class=\"ruby-operator\">&amp;&amp;</span> <span class=\"ruby-identifier\">c</span>"
+    },
+    "minus": {
+      "code": "x - 1",
+      "html": "<span class=\"ruby-identifier\">x</span> <span class=\"ruby-operator\">-</span> <span class=\"ruby-value\">1</span>"
+    }
+  },
+  "verbatim": {
+    "ruby": {
+      "in": "  x = 1 + 2\n  puts x\n",
+      "html": "\n<pre class=\"ruby\"><span class=\"ruby-identifier\">x</span> = <span class=\"ruby-value\">1</span> <span class=\"ruby-operator\">+</span> <span class=\"ruby-value\">2</span>\n<span class=\"ruby-identifier\">puts</span> <span class=\"ruby-identifier\">x</span>\n</pre>\n"
+    },
+    "plain": {
+      "in": "  this is @plain text!\n  not ruby code @\n",
+      "html": "\n<pre>this is @plain text!\nnot ruby code @</pre>\n"
+    },
+    "def": {
+      "in": "  def foo(a, b)\n    a + b\n  end\n",
+      "html": "\n<pre class=\"ruby\"><span class=\"ruby-keyword\">def</span> <span class=\"ruby-identifier ruby-title\">foo</span>(<span class=\"ruby-identifier\">a</span>, <span class=\"ruby-identifier\">b</span>)\n  <span class=\"ruby-identifier\">a</span> <span class=\"ruby-operator\">+</span> <span class=\"ruby-identifier\">b</span>\n<span class=\"ruby-keyword\">end</span>\n</pre>\n"
+    },
+    "ivar": {
+      "in": "  @ivar = :sym\n",
+      "html": "\n<pre class=\"ruby\"><span class=\"ruby-ivar\">@ivar</span> = <span class=\"ruby-value\">:sym</span>\n</pre>\n"
+    },
+    "const": {
+      "in": "  PI = 3.14 # pi\n",
+      "html": "\n<pre class=\"ruby\"><span class=\"ruby-constant\">PI</span> = <span class=\"ruby-value\">3.14</span> <span class=\"ruby-comment\"># pi</span>\n</pre>\n"
+    },
+    "str": {
+      "in": "  a = \"hello\"\n",
+      "html": "\n<pre class=\"ruby\"><span class=\"ruby-identifier\">a</span> = <span class=\"ruby-string\">&quot;hello&quot;</span>\n</pre>\n"
+    },
+    "notruby": {
+      "in": "  Hello, World\n",
+      "html": "\n<pre>Hello, World</pre>\n"
+    },
+    "arr": {
+      "in": "  arr = [1, 2, 3]\n",
+      "html": "\n<pre class=\"ruby\"><span class=\"ruby-identifier\">arr</span> = [<span class=\"ruby-value\">1</span>, <span class=\"ruby-value\">2</span>, <span class=\"ruby-value\">3</span>]\n</pre>\n"
+    },
+    "blanks": {
+      "in": "  a\n\n\n  b\n",
+      "html": "\n<pre class=\"ruby\"><span class=\"ruby-identifier\">a</span>\n\n<span class=\"ruby-identifier\">b</span>\n</pre>\n"
+    }
+  }
+}

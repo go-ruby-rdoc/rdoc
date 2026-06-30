@@ -1,0 +1,42 @@
+{
+  "pipe": {
+    "heading": {
+      "in": "= Title\n",
+      "html": "\n<h1 id=\"label-Title\">Title</h1>\n"
+    },
+    "para": {
+      "in": "hello *world*\n",
+      "html": "\n<p>hello <strong>world</strong></p>\n"
+    },
+    "verbatim": {
+      "in": "  code line\n",
+      "html": "\n<pre><code>code line\n</code></pre>\n"
+    }
+  },
+  "misc": {
+    "rdoc_image": {
+      "in": "rdoc-image:logo.png\n",
+      "html": "\n<p><img src=\"logo.png\"></p>\n"
+    },
+    "rdoc_image_alt": {
+      "in": "see {rdoc-image:logo.png:My Logo}[x]\n",
+      "html": "\n<p>see <a href=\"x\"><img src=\"logo.png\" alt=\"My Logo\"></a></p>\n"
+    },
+    "blockquote_nested": {
+      "in": ">>>\n  quoted\n",
+      "html": "\n<blockquote>\n<p>quoted</p>\n</blockquote>\n"
+    },
+    "h7": {
+      "in": "======= Deep\n",
+      "html": "\n<h6 id=\"label-Deep\"><a href=\"#label-Deep\">Deep</a></h6>\n"
+    },
+    "rdoc_label_link": {
+      "in": "see rdoc-label:foo:bar baz\n",
+      "html": "\n<p>see <a id=\"bar\" href=\"#foo\">foo:bar</a> baz</p>\n"
+    },
+    "file_link": {
+      "in": "see file.rb[file.rb]\n",
+      "html": "\n<p>see <a href=\"file_rb.html\">file.rb</a></p>\n"
+    }
+  }
+}

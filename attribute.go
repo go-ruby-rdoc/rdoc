@@ -272,64 +272,76 @@ func (st *attrState) convertMatchingWordPairs(exclusive bool) {
 	st.scanMatchingPairs(sel, all)
 }
 
-// scanMatchingPairs performs one full left-to-right scan, replacing every
-// matching pair. It loops until no change, mirroring the `1 while gsub!`.
+// scanMatchingPairs loops over single left-to-right passes until a pass makes
+// no further attribute update, mirroring the `1 while str.gsub!{...}` idiom.
+// Each pass is non-overlapping (the cursor advances past every match it
+// handles), and only attribute-updating matches request another pass, so the
+// loop always terminates even on inputs like "**bold**".
 func (st *attrState) scanMatchingPairs(sel map[byte]uint, all map[byte]bool) {
-	for {
-		matched := st.scanMatchingPairsOnce(sel, all)
-		if !matched {
-			return
-		}
+	for st.scanMatchingPairsOnce(sel, all) {
 	}
 }
 
+// scanMatchingPairsOnce performs one full left-to-right pass over st.str,
+// NUL-masking the delimiters of every matching pair whose word span it newly
+// attributes, and reports whether any such update occurred.
 func (st *attrState) scanMatchingPairsOnce(sel map[byte]uint, all map[byte]bool) bool {
 	s := st.str
-	for i := 0; i < len(s); i++ {
+	var b strings.Builder
+	anyUpdate := false
+	i := 0
+	for i < len(s) {
 		bit, ok := sel[s[i]]
 		if !ok {
+			b.WriteByte(s[i])
+			i++
 			continue
 		}
 		// preceding boundary: ^ | \W | any delimiter char
 		if i > 0 {
 			prev := s[i-1]
 			if !(isNonWord(prev) || all[prev]) {
+				b.WriteByte(s[i])
+				i++
 				continue
 			}
 		}
-		delim := s[i]
 		// the opening delimiter must not be followed by PROTECT
 		if i+1 < len(s) && s[i+1] == chProtect[0] {
+			b.WriteByte(s[i])
+			i++
 			continue
 		}
-		// match the word: (\1*[#\\]?[\w:PROTECT./\[\]-]+?\S?) then \1 (?!\1)
+		delim := s[i]
 		end, wordStart, wordEnd, found := matchPairWord(s, i, delim)
 		if !found {
+			b.WriteByte(s[i])
+			i++
 			continue
 		}
 		// trailing boundary: ALL | \W | $
 		if end+1 < len(s) {
 			nx := s[end+1]
 			if !(isNonWord(nx) || all[nx]) {
+				b.WriteByte(s[i])
+				i++
 				continue
 			}
 		}
 		word := s[wordStart:wordEnd]
-		updated := st.attrs.setAttrs(wordStart, wordEnd-wordStart, bit)
-		openLen := wordStart - i
-		closeLen := end - wordEnd + 1
-		var open, clo string
-		if updated {
-			open = strings.Repeat(chNull, openLen)
-			clo = strings.Repeat(chNull, closeLen)
+		if st.attrs.setAttrs(wordStart, wordEnd-wordStart, bit) {
+			b.WriteString(strings.Repeat(chNull, wordStart-i))
+			b.WriteString(word)
+			b.WriteString(strings.Repeat(chNull, end-wordEnd+1))
+			anyUpdate = true
 		} else {
-			open = s[i:wordStart]
-			clo = s[wordEnd : end+1]
+			// already attributed: keep the text as-is and scan past it.
+			b.WriteString(s[i : end+1])
 		}
-		st.str = s[:i] + open + word + clo + s[end+1:]
-		return true
+		i = end + 1
 	}
-	return false
+	st.str = b.String()
+	return anyUpdate
 }
 
 // matchPairWord matches the word body of a matching pair beginning at the

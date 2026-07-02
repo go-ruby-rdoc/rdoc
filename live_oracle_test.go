@@ -24,6 +24,14 @@ func rubyHTML(t *testing.T, markup string) (string, bool) {
 	if _, err := exec.LookPath("ruby"); err != nil {
 		return "", false
 	}
+	// RDoc's default ToHtml output is version-sensitive: older rdoc (on CI runners'
+	// system ruby / the 3.4 lane) adds heading permalink spans and omits the </dt>
+	// close tag. This port targets the rdoc shipped with Ruby >= 4.0, so gate the
+	// live oracle on the Ruby version; lanes below 4.0 skip it and the deterministic
+	// golden tests (which hold 100% coverage on their own) remain the correctness gate.
+	if err := exec.Command("ruby", "-e", `exit(RUBY_VERSION >= "4.0" ? 0 : 1)`).Run(); err != nil {
+		return "", false
+	}
 	const script = `$VERBOSE=nil
 require "rdoc/rdoc"
 src = STDIN.read

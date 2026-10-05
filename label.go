@@ -46,7 +46,7 @@ func handleLabelTidylink(text string) string {
 	return text
 }
 
-// cgiEscapeLabel reproduces Ruby's CGI.escape(label).gsub('%','-').sub(/^-/,'').
+// cgiEscapeLabel reproduces Ruby's CGI.escape(label).gsub('%','-').sub(/^-/,”).
 func cgiEscapeLabel(s string) string {
 	var b strings.Builder
 	for i := 0; i < len(s); i++ {

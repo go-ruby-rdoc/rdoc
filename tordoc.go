@@ -26,7 +26,7 @@ func ToRdocString(markup string) string {
 	return f.endAccepting()
 }
 
-func (r *ToRdoc) startAccepting()     { r.res = nil }
+func (r *ToRdoc) startAccepting()      { r.res = nil }
 func (r *ToRdoc) endAccepting() string { return strings.Join(r.res, "") }
 func (r *ToRdoc) out(s string)         { r.res = append(r.res, s) }
 

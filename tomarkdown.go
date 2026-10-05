@@ -27,9 +27,9 @@ func ToMarkdownString(markup string) string {
 	return f.endAccepting()
 }
 
-func (m *ToMarkdown) startAccepting()    { m.res = nil }
+func (m *ToMarkdown) startAccepting()      { m.res = nil }
 func (m *ToMarkdown) endAccepting() string { return strings.Join(m.res, "") }
-func (m *ToMarkdown) out(s string)        { m.res = append(m.res, s) }
+func (m *ToMarkdown) out(s string)         { m.res = append(m.res, s) }
 
 func (m *ToMarkdown) acceptParagraph(p *Paragraph) {
 	m.out(wrapText(markdownInline(p.text()), 76) + "\n")

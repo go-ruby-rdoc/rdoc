@@ -69,10 +69,10 @@ const (
 )
 
 var (
-	urlCharsClass     = `[A-Za-z0-9\-._~:/?#\[\]@!$&'()*+,;%=]`
-	reHyperlink       = regexp.MustCompile(`(?:link:|https?:|mailto:|ftp:|irc:|www\.)` + urlCharsClass + `+\w`)
-	reRDocLink        = regexp.MustCompile(`rdoc-[a-z]+:(?:[^\s\[\]]|\[\d+\])+`)
-	reTidyLink = regexp.MustCompile(`(?:\{.*?\}|\b[^\s{}]*?)\[\S+?\]`)
+	urlCharsClass = `[A-Za-z0-9\-._~:/?#\[\]@!$&'()*+,;%=]`
+	reHyperlink   = regexp.MustCompile(`(?:link:|https?:|mailto:|ftp:|irc:|www\.)` + urlCharsClass + `+\w`)
+	reRDocLink    = regexp.MustCompile(`rdoc-[a-z]+:(?:[^\s\[\]]|\[\d+\])+`)
+	reTidyLink    = regexp.MustCompile(`(?:\{.*?\}|\b[^\s{}]*?)\[\S+?\]`)
 	// reCrossRefDefault is a focused subset of RDoc's CROSSREF_REGEXP covering
 	// the common references: "A::B.meth"/"A#meth", a bare class/constant name
 	// "A::B::C" (requiring a trailing boundary so contractions like "can't" are

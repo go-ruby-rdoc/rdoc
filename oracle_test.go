@@ -114,11 +114,11 @@ func indexOf(s, sub string) int {
 }
 
 type oracleCM struct {
-	Module    bool `json:"module"`
-	Name      string
-	FullName  string `json:"full_name"`
-	Comment   string
-	Methods   []struct {
+	Module   bool `json:"module"`
+	Name     string
+	FullName string `json:"full_name"`
+	Comment  string
+	Methods  []struct {
 		Name, Params string
 		Singleton    bool
 		Vis, Comment string

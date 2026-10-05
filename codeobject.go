@@ -43,7 +43,7 @@ type ClassModule struct {
 	// Superclass is the parent class name for "class X < Y" (empty otherwise).
 	Superclass string
 	// Comment is the attached documentation comment (RDoc markup source).
-	Comment string
+	Comment   string
 	Methods   []*AnyMethod
 	Constants []*Constant
 	Attrs     []*Attr

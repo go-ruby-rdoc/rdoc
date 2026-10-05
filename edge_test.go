@@ -3,7 +3,9 @@ package rdoc
 import "testing"
 
 func TestEdgeOracle(t *testing.T) {
-	var c struct{ HTML map[string]struct{ In, HTML string } }
+	var c struct {
+		HTML map[string]struct{ In, HTML string }
+	}
 	readJSON(t, "edge.json", &c)
 	// cases whose golden output contains highlighting need the highlighter+parseable
 	opts := &HTMLOptions{OutputDecoration: true, Highlighter: HighlightRuby}
@@ -25,7 +27,9 @@ func TestEdgeOracle(t *testing.T) {
 }
 
 func TestParserOracle(t *testing.T) {
-	var c struct{ HTML map[string]struct{ In, HTML string } }
+	var c struct {
+		HTML map[string]struct{ In, HTML string }
+	}
 	readJSON(t, "parser.json", &c)
 	opts := &HTMLOptions{OutputDecoration: true, Highlighter: HighlightRuby}
 	for name, tc := range c.HTML {

@@ -16,20 +16,20 @@ import (
 // that order, giving the bit values below. The next free bit (32) is the base
 // for formatter-registered regexp handlers (HYPERLINK, CROSSREF, ...).
 const (
-	attrRegexp uint = 1 << iota // regexp_handling marker bit (value 1)
-	attrBold                    // value 2
-	attrEM                      // value 4
-	attrTT                      // value 8
-	attrUserBase                // value 16, first formatter-registered handler bit
+	attrRegexp   uint = 1 << iota // regexp_handling marker bit (value 1)
+	attrBold                      // value 2
+	attrEM                        // value 4
+	attrTT                        // value 8
+	attrUserBase                  // value 16, first formatter-registered handler bit
 )
 
 // non-printing control chars used by the masking scheme, mirroring the Ruby
 // constants.
 const (
-	chNull         = "\x00"
-	chProtect      = "\x04" // PROTECT_ATTR (A_PROTECT)
-	chNonPrintBeg  = "\x01" // NON_PRINTING_START
-	chNonPrintEnd  = "\x02" // NON_PRINTING_END
+	chNull        = "\x00"
+	chProtect     = "\x04" // PROTECT_ATTR (A_PROTECT)
+	chNonPrintBeg = "\x01" // NON_PRINTING_START
+	chNonPrintEnd = "\x02" // NON_PRINTING_END
 )
 
 // flowItem is one element of the inline flow.
@@ -389,7 +389,9 @@ func matchPairWord(s string, start int, delim byte) (closeIdx, wordStart, wordEn
 func isNonWord(b byte) bool {
 	return !((b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z') || (b >= '0' && b <= '9') || b == '_')
 }
-func isNonSpace(b byte) bool { return b != ' ' && b != '\t' && b != '\n' && b != '\r' && b != '\f' && b != '\v' }
+func isNonSpace(b byte) bool {
+	return b != ' ' && b != '\t' && b != '\n' && b != '\r' && b != '\f' && b != '\v'
+}
 func isWordBodyChar(b byte) bool {
 	if !isNonWord(b) {
 		return true // \w
